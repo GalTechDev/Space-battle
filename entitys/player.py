@@ -66,11 +66,9 @@ class Player(gt.Menu):
                 self.velocity_y *= friction if abs(self.velocity_y) > 0.1 else 0
                 self.velocity_x *= friction if abs(self.velocity_x) > 0.1 else 0
             else:
-                self.velocity_y = min(self.velocity_y, self.max_velocity)
-                self.velocity_x = min(self.velocity_x, self.max_velocity)
+                self.velocity_y = -self.max_velocity if self.velocity_y < -self.max_velocity else self.max_velocity if self.velocity_y > self.max_velocity else self.velocity_y
+                self.velocity_x = -self.max_velocity if self.velocity_x < -self.max_velocity else self.max_velocity if self.velocity_x > self.max_velocity else self.velocity_x
             
             
             self.sprite.rect.y += self.velocity_y
             self.sprite.rect.x += self.velocity_x
-            
-            print(f"velocity : y:{self.velocity_y}, x:{self.velocity_x}")
