@@ -1,7 +1,7 @@
 import GTLib as gt
 import pygame as pg
 
-class Player(gt.Menu):
+class Player(gt.Entity):
     controls = {
         "PROFILE_1": {
             "UP":   {"key":pg.K_UP,     "active": False},
@@ -11,10 +11,10 @@ class Player(gt.Menu):
         },
         
         "PROFILE_2": {
-            "UP":   {"key":pg.K_z,     "active": False},
-            "DOWN": {"key":pg.K_s,   "active": False},
-            "LEFT": {"key":pg.K_q,   "active": False},
-            "RIGHT":{"key":pg.K_d,  "active": False}
+            "UP":   {"key":pg.K_z,      "active": False},
+            "DOWN": {"key":pg.K_s,      "active": False},
+            "LEFT": {"key":pg.K_q,      "active": False},
+            "RIGHT":{"key":pg.K_d,      "active": False}
         }
     }
     
@@ -23,12 +23,12 @@ class Player(gt.Menu):
         self.sprite = gt.UI.Square(position=position, size=size, color="blue")
         self.move_set = self.controls.get(profile)
         
-        self.max_velocity = 3
-        self.velocity_x = 0
-        self.velocity_y = 0
-        self.accel = 0.1
+        self.max_velocity: int = 3
+        self.velocity_x: int = 0
+        self.velocity_y: int = 0
+        self.accel: float = 0.1
         
-        self.friction = 1-0.1
+        self.friction: float = 1-0.1
         
         self.add_sprite(self.sprite)
         
@@ -59,16 +59,15 @@ class Player(gt.Menu):
                     elif move == "RIGHT":
                         self.velocity_x +=self.accel
             
-            self.sprite.rect.y += self.velocity_y
             self.sprite.rect.x += self.velocity_x
+            self.sprite.rect.y += self.velocity_y
             
             if friction != 1:
-                self.velocity_y *= friction if abs(self.velocity_y) > 0.1 else 0
                 self.velocity_x *= friction if abs(self.velocity_x) > 0.1 else 0
+                self.velocity_y *= friction if abs(self.velocity_y) > 0.1 else 0
             else:
-                self.velocity_y = -self.max_velocity if self.velocity_y < -self.max_velocity else self.max_velocity if self.velocity_y > self.max_velocity else self.velocity_y
                 self.velocity_x = -self.max_velocity if self.velocity_x < -self.max_velocity else self.max_velocity if self.velocity_x > self.max_velocity else self.velocity_x
-            
-            
-            self.sprite.rect.y += self.velocity_y
+                self.velocity_y = -self.max_velocity if self.velocity_y < -self.max_velocity else self.max_velocity if self.velocity_y > self.max_velocity else self.velocity_y
+                
             self.sprite.rect.x += self.velocity_x
+            self.sprite.rect.y += self.velocity_y

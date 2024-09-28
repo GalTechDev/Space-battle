@@ -44,3 +44,8 @@ class Menu:
                 object.event(events)
 
         return add_custom
+    
+
+class Entity(Menu):
+    def __init__(self) -> None:
+        super().__init__()

@@ -38,16 +38,16 @@ class Base:
     def call_menu(self, menu: Menu, layer: int = -1):
         self.menu.insert(layer, menu)
 
-    def switch_menu(self, layer1: int, layer2: int):
+    def switch_menu_layer(self, layer1: int, layer2: int):
         self.menu[layer1], self.menu[layer2] = self.menu[layer2], self.menu[layer1]
 
-    def switch_menu_layer(self, menu_1: Menu, menu_2: Menu):
+    def switch_menu(self, menu_1: Menu, menu_2: Menu):
         layer_1 = self.get_layer(menu_1)
         layer_2 = self.get_layer(menu_2)
         if layer_1 == -1 or layer_2 == -1:
             raise Exception("The given menu are not found, unable to switch them")
         
-        self.switch_menu(self.get_layer(menu_1), self.get_layer(menu_2))
+        self.switch_menu_layer(self.get_layer(menu_1), self.get_layer(menu_2))
 
     def get_menu(self, layer: int):
         """

@@ -5,9 +5,9 @@ from .sprite import Sprite
 ft.init()
 
 class Text(Sprite):
-    def __init__(self, position, size, text:str, rotation=0, alpha=255, fgcolor: str="white", bgcolor: str="black", font=ft.SysFont('Verdana', 15)):
+    def __init__(self, position, text:str, rotation=0, alpha=255, fgcolor: str="white", bgcolor: str="black", font=ft.SysFont('Verdana', 15)):
         '''A Text object: Need to call draw() intern fonction to work'''
-        Sprite.__init__(self, position, size, rotation, alpha)
+        Sprite.__init__(self, position, (0,0), rotation, alpha)
         
         self.fgcolor = fgcolor
         self.bgcolor = bgcolor
@@ -15,6 +15,7 @@ class Text(Sprite):
         self.font = font
         self.set_text(text)
         self.surface.set_alpha(alpha)
+        self.set_size(self.surface.get_size())
         self.set_pos(position)
 
     def set_fgcolor(self, new_fgcolor):

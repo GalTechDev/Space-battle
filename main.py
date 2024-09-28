@@ -4,9 +4,9 @@ import sys
 
 from menus import *
 
-WINDOWS_SIZE = (700,500)
+WINDOWS_SIZE = (900,700)
 
-app = gt.Advanced(size=WINDOWS_SIZE, fps=120, show_fps=False)
+app = gt.Advanced(size=WINDOWS_SIZE, fps=120, show_fps=True)
 
 @app.event()
 def quit(event):

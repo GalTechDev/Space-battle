@@ -37,9 +37,9 @@ class Jeu(gt.Menu):
 
 
 jeu = Jeu()
-score_text = gt.Text((WINDOWS_SIZE[0]-100,10), (100,40), "SCORE : 0", font=ft.SysFont('Verdana', 15))
-time_text = gt.Text((WINDOWS_SIZE[0]-200,10), (100,40), "TIME : 10", font=ft.SysFont('Verdana', 15))
-pb_text = gt.Text((WINDOWS_SIZE[0]-300,10), (100,40), "BEST : 0", font=ft.SysFont('Verdana', 15))
+score_text = gt.Text((WINDOWS_SIZE[0]-100,10), "SCORE : 0", font=ft.SysFont('Verdana', 15))
+time_text = gt.Text((WINDOWS_SIZE[0]-200,10), "TIME : 10", font=ft.SysFont('Verdana', 15))
+pb_text = gt.Text((WINDOWS_SIZE[0]-300,10), "BEST : 0", font=ft.SysFont('Verdana', 15))
 jeu.add_sprite(score_text)
 jeu.add_sprite(time_text)
 jeu.add_sprite(pb_text)
@@ -47,7 +47,7 @@ jeu.add_sprite(pb_text)
 @jeu.update()
 def gen_object():
     if len(jeu.groupe_square) < jeu.max_cible:
-        jeu.groupe_square.add(gt.Text((random.randint(0, WINDOWS_SIZE[0]-jeu.square_size), random.randint(0, WINDOWS_SIZE[1]-jeu.square_size)), (jeu.square_size, jeu.square_size), text=str(jeu.i), font=ft.SysFont('Verdana', jeu.square_size) ,bgcolor=random.choice(["red", "blue", "green"])))
+        jeu.groupe_square.add(gt.Text((random.randint(0, WINDOWS_SIZE[0]-jeu.square_size), random.randint(0, WINDOWS_SIZE[1]-jeu.square_size)), text=str(jeu.i), font=ft.SysFont('Verdana', jeu.square_size) ,bgcolor=random.choice(["red", "blue", "green"])))
         jeu.i +=1
         if jeu.i > jeu.max_cible:
             jeu.i = 1
@@ -93,7 +93,7 @@ class GameOver(gt.Menu):
         self.timer = time.time()
 
 gameover_menu = GameOver()
-gameover_menu.add_sprite(gt.Text((WINDOWS_SIZE[0]//2-100//2,20), (100,40), "GAME OVER", fgcolor="red", font=ft.SysFont('Verdana', 40)))
+gameover_menu.add_sprite(gt.Text((WINDOWS_SIZE[0]//2-100//2,20), "GAME OVER", fgcolor="red", font=ft.SysFont('Verdana', 40)))
 
 @gameover_menu.update()
 def check_for_end():
@@ -105,7 +105,7 @@ def check_for_end():
 #menu principal
 menu_principal = gt.Menu()
 
-menu_principal.add_sprite(gt.Text((WINDOWS_SIZE[0]//2-100//2,20), (100,40), "G'OSU", fgcolor="pink", font=ft.SysFont('Verdana', 40)))
+menu_principal.add_sprite(gt.Text((WINDOWS_SIZE[0]//2-100//2,20), "G'OSU", fgcolor="pink", font=ft.SysFont('Verdana', 40)))
 
 @menu_principal.event()
 def get_clic(events):
