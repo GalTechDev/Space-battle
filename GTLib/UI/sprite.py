@@ -49,14 +49,14 @@ class Sprite:
     def get_size(self):
         return self.surface.get_size()
 
-    def blit(self, screen:pg.Surface, surface:pg.Surface,position=None):
+    def blit(self, screen:pg.Surface, surface:pg.Surface, rect=None):
         if self.angle!=0:
             new_surface = pg.transform.rotate(surface,self.angle)
         else:
             new_surface = surface
         new_surface.set_alpha(self.alpha)
         
-        screen.blit(new_surface, self.rect)
+        screen.blit(new_surface, self.rect if rect is None else rect)
 
     def collidepoint(self,pos):
         return self.rect.collidepoint(pos)

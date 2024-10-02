@@ -28,7 +28,7 @@ class Jeu(gt.Menu):
         self.score = 0
 
         self.groupe_square = gt.UI.Group()
-        self.add_sprite(self.groupe_square)
+        self.add_object(self.groupe_square)
         self.update()
 
     def reset(self):
@@ -40,9 +40,9 @@ jeu = Jeu()
 score_text = gt.Text((WINDOWS_SIZE[0]-100,10), "SCORE : 0", font=ft.SysFont('Verdana', 15))
 time_text = gt.Text((WINDOWS_SIZE[0]-200,10), "TIME : 10", font=ft.SysFont('Verdana', 15))
 pb_text = gt.Text((WINDOWS_SIZE[0]-300,10), "BEST : 0", font=ft.SysFont('Verdana', 15))
-jeu.add_sprite(score_text)
-jeu.add_sprite(time_text)
-jeu.add_sprite(pb_text)
+jeu.add_object(score_text)
+jeu.add_object(time_text)
+jeu.add_object(pb_text)
 
 @jeu.update()
 def gen_object():
@@ -93,7 +93,7 @@ class GameOver(gt.Menu):
         self.timer = time.time()
 
 gameover_menu = GameOver()
-gameover_menu.add_sprite(gt.Text((WINDOWS_SIZE[0]//2-100//2,20), "GAME OVER", fgcolor="red", font=ft.SysFont('Verdana', 40)))
+gameover_menu.add_object(gt.Text((WINDOWS_SIZE[0]//2-100//2,20), "GAME OVER", fgcolor="red", font=ft.SysFont('Verdana', 40)))
 
 @gameover_menu.update()
 def check_for_end():
@@ -105,7 +105,7 @@ def check_for_end():
 #menu principal
 menu_principal = gt.Menu()
 
-menu_principal.add_sprite(gt.Text((WINDOWS_SIZE[0]//2-100//2,20), "G'OSU", fgcolor="pink", font=ft.SysFont('Verdana', 40)))
+menu_principal.add_object(gt.Text((WINDOWS_SIZE[0]//2-100//2,20), "G'OSU", fgcolor="pink", font=ft.SysFont('Verdana', 40)))
 
 @menu_principal.event()
 def get_clic(events):

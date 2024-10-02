@@ -1,7 +1,8 @@
 import GTLib as gt
 import pygame as pg
 
-class Player(gt.Entity):
+
+class Player(gt.Entites):
     controls = {
         "PROFILE_1": {
             "UP":   {"key":pg.K_UP,     "active": False},
@@ -30,7 +31,7 @@ class Player(gt.Entity):
         
         self.friction: float = 1-0.1
         
-        self.add_sprite(self.sprite)
+        self.add_object(self.sprite)
         
         
         @self.event()
@@ -51,13 +52,13 @@ class Player(gt.Entity):
                 if info.get("active"):
                     friction = 1
                     if move == "UP":
-                        self.velocity_y -=self.accel
+                        self.velocity_y -= self.accel
                     elif move == "DOWN":
-                        self.velocity_y +=self.accel
+                        self.velocity_y += self.accel
                     elif move == "LEFT":
-                        self.velocity_x -=self.accel
+                        self.velocity_x -= self.accel
                     elif move == "RIGHT":
-                        self.velocity_x +=self.accel
+                        self.velocity_x += self.accel
             
             self.sprite.rect.x += self.velocity_x
             self.sprite.rect.y += self.velocity_y

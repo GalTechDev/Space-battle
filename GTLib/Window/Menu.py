@@ -1,18 +1,18 @@
 import pygame as pg
 from ..Tools.function import void
 
-class Menu:
+class Entites:
     def __init__(self) -> None:
         self.objects = []
 
         self.custom_update = [void]
         self.custom_event = [void]
 
-    def add_sprite(self, sprite):
-        self.objects.append(sprite)
+    def add_object(self, object):
+        self.objects.append(object)
 
-    def remove_sprite(self, sprite):
-        self.objects.remove(sprite)
+    def remove_object(self, object):
+        self.objects.remove(object)
 
     def draw(self, screen):
         for object in self.objects:
@@ -45,7 +45,6 @@ class Menu:
 
         return add_custom
     
-
-class Entity(Menu):
+class Menu(Entites):
     def __init__(self) -> None:
         super().__init__()

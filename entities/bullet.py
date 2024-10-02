@@ -1,7 +1,8 @@
 import GTLib as gt
 import pygame as pg
+from Mechanics import FollowCam
 
-class Bullet(gt.Entity):
+class Bullet(gt.Entites):
     def __init__(self, damage: int = 0) -> None:
         super().__init__()
 

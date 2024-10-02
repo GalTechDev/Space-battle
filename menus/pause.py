@@ -17,14 +17,14 @@ class Pause(gt.Menu):
             (self.text.get_size()[0]//2, self.text.get_size()[1]//2)
         )
 
-        self.add_sprite(self.text)
+        self.add_object(self.text)
 
         @self.event()
         def resume_game(events):
             if events.type == pg.KEYDOWN:
                 if events.key == pg.K_ESCAPE:
                     app.call_menu(game)                  
-                    app.call_menu(game.player1)
-                    app.call_menu(game.player2)
+                    #app.call_menu(game.player1)
+                    #app.call_menu(game.player2)
                     
                     app.drop_menu(self)
