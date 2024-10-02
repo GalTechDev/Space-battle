@@ -1,5 +1,4 @@
 from .Base_Windows import *
-
 import pygame.freetype as ft
 
 class Advanced(Base):
@@ -28,8 +27,6 @@ class Advanced(Base):
 
         self.screen.fill('black')
         
-        #update        
-        [f() for f in self.custom_update]
         for m in self.menu:
             m.draw(self.screen)
         self.draw_fps()

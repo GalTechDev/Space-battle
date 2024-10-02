@@ -2,7 +2,7 @@ import pygame as pg
 import sys
 from ..Tools.function import void
 from .Menu import *
-import asyncio
+import threading
 
 
 class Base:
@@ -76,25 +76,15 @@ class Base:
         [f() for f in self.custom_update]
         for m in self.menu:
             m.update()
-        pg.display.flip()
-        self.dt = self.clock.tick(self.fps) * 0.001
 
         return add_custom
 
     async def draw(self):
-        #decorator for custom update
-        def add_custom(func):
-            self.custom_update.append(func)
-            return func
-
         self.screen.fill('black')
         
-        #update        
-        [f() for f in self.custom_update]
         for m in self.menu:
             m.draw(self.screen)
 
-        return add_custom
 
     def event(self):
         #decorator for custom update
@@ -115,3 +105,6 @@ class Base:
             self.event()
             self.update()
             self.draw()
+            
+            pg.display.flip()
+            self.dt = self.clock.tick(self.fps) * 0.001

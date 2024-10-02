@@ -17,7 +17,11 @@ class Game(gt.Menu):
         self.bullets: list = []
         
         self.player1: Player = Player(profile="PROFILE_1", position=(self.app.size[0]//2-5, self.app.size[1]//2-5), size=(10,10))
-        self.camera = Camera(self.player1)
+        self.camera = Camera(app, self, self.player1)
+        
+        self.canvas = pg.Surface(self.map.sprite.base_surface.get_size(), pg.SRCALPHA, 32)
+        self.rect = self.canvas.get_rect()
+        
         #self.player2: Player = Player(profile="PROFILE_2", position=(30,30), size=(10,10))
 
         #self.groupe_sprit: gt.UI.Group = gt.UI.Group()       
@@ -34,8 +38,6 @@ class Game(gt.Menu):
                     app.call_menu(Pause(app, self))
 
                     app.drop_menu(self)
-                    #app.drop_menu(self.player1)
-                    #app.drop_menu(self.player2)
                   
         @self.event()
         def k_add_planet(events):
@@ -58,13 +60,12 @@ class Game(gt.Menu):
         self.add_object(self.asteroids[-1])
 
     def draw(self, screen: pg.Surface):
-        canvas = pg.Surface(self.map.sprite.base_surface.get_size(), pg.SRCALPHA, 32)
-        rect = canvas.get_rect()
+        self.canvas.fill((0,0,0,0))
         
         for object in self.objects:
-            object.draw(canvas)
+            object.draw(self.canvas)
 
-        rect.x = -self.camera.sprite.rect.x
-        rect.y = -self.camera.sprite.rect.y
+        self.rect.x = -self.camera.sprite.rect.x
+        self.rect.y = -self.camera.sprite.rect.y
         
-        screen.blit(canvas, rect)
+        screen.blit(self.canvas, self.rect)
