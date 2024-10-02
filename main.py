@@ -14,7 +14,7 @@ def quit(event):
         pg.quit()
         sys.exit()
 
-game = Game(app)
+mygame = Game(app)
 
-app.call_menu(game)
+app.call_menu(mygame)
 app.run()

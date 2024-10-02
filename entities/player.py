@@ -24,7 +24,7 @@ class Player(gt.Entites):
         self.sprite = gt.UI.Square(position=position, size=size, color="blue")
         self.move_set = self.controls.get(profile)
         
-        self.max_velocity: int = 3
+        self.max_velocity: int = 6
         self.velocity_x: int = 0
         self.velocity_y: int = 0
         self.accel: float = 0.1
@@ -59,9 +59,6 @@ class Player(gt.Entites):
                         self.velocity_x -= self.accel
                     elif move == "RIGHT":
                         self.velocity_x += self.accel
-            
-            self.sprite.rect.x += self.velocity_x
-            self.sprite.rect.y += self.velocity_y
             
             if friction != 1:
                 self.velocity_x *= friction if abs(self.velocity_x) > 0.1 else 0

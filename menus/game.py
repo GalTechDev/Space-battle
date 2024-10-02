@@ -10,21 +10,22 @@ class Game(gt.Menu):
         super().__init__()
         self.app: gt.Advanced = app
         
-        self.map: Map = Map()
+        self.map: Map = Map(app, self)
 
         self.plannets: list = []
         self.asteroids: list = []
         self.bullets: list = []
         
-        self.player1: Player = Player(profile="PROFILE_1", position=(10,10), size=(10,10))
+        self.player1: Player = Player(profile="PROFILE_1", position=(self.app.size[0]//2-5, self.app.size[1]//2-5), size=(10,10))
         self.camera = Camera(self.player1)
         #self.player2: Player = Player(profile="PROFILE_2", position=(30,30), size=(10,10))
 
-        self.groupe_sprit: gt.UI.Group = gt.UI.Group()       
-        self.add_object(self.groupe_sprit)
+        #self.groupe_sprit: gt.UI.Group = gt.UI.Group()       
+        #self.add_object(self.groupe_sprit)
         
-        self.add_object(self.player1)
+        self.add_object(self.map)
         self.add_object(self.camera)
+        self.add_object(self.player1)
         
         @self.event()
         def pause_game(events):
@@ -57,13 +58,13 @@ class Game(gt.Menu):
         self.add_object(self.asteroids[-1])
 
     def draw(self, screen: pg.Surface):
-        canvas = pg.Surface((2000, 2000))
+        canvas = pg.Surface(self.map.sprite.base_surface.get_size(), pg.SRCALPHA, 32)
         rect = canvas.get_rect()
         
         for object in self.objects:
             object.draw(canvas)
 
-        rect.x = self.camera.sprite.rect.x
-        rect.y = self.camera.sprite.rect.y
+        rect.x = -self.camera.sprite.rect.x
+        rect.y = -self.camera.sprite.rect.y
         
         screen.blit(canvas, rect)

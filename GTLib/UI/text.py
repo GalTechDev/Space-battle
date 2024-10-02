@@ -7,7 +7,7 @@ ft.init()
 class Text(Sprite):
     def __init__(self, position, text:str, rotation=0, alpha=255, fgcolor: str="white", bgcolor: str="black", font=ft.SysFont('Verdana', 15)):
         '''A Text object: Need to call draw() intern fonction to work'''
-        Sprite.__init__(self, position, (0,0), rotation, alpha)
+        super().__init__(position, (0,0), rotation, alpha)
         
         self.fgcolor = fgcolor
         self.bgcolor = bgcolor

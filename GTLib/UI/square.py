@@ -5,17 +5,14 @@ from .sprite import Sprite
 class Square(Sprite):
     def __init__(self, position: tuple[int,int], size: tuple[int,int], rotation: float=0, alpha: int=255 , color="black"):
         '''Make a simple square that include some methode.'''
-        pg.sprite.Sprite.__init__(self)
-        Sprite.__init__(self,position,size,rotation,alpha)
+        #pg.sprite.Sprite.__init__(self)
+        super().__init__(position, size, rotation, alpha)
 
         self.set_color(color)
 
     def set_color(self,color):
         self.color = color
         self.surface.fill(pg.Color(self.color))
-
-    def draw(self, screen):
-        self.blit(screen, self.surface)
 
     def get_dic(self) -> dict:
         '''Return a dic with square information. Can be use to make json file.'''

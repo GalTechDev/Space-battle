@@ -10,13 +10,13 @@ random.seed(1)
 class Asteroid(gt.Entites, AffectedByGravity):
     def __init__(self, app: gt.Base, game, x: int = None, y: int = None, size: int = None):
         super().__init__()
-
         self.app = app
-
-        x: int = x if x is not None else random.randint(0, app.size[1])
-        y: int = y if y is not None else random.randint(0, app.size[0])
-
+        
         self.size: int = size if size is not None else random.randint(5, 15)
+
+        x: int = x if x is not None else random.randint(0, game.map.sprite.get_size()[1]-self.size)
+        y: int = y if y is not None else random.randint(0, game.map.sprite.get_size()[0]-self.size)
+
         self.masse: int = self.size**2
 
         self.sprite = gt.Square(

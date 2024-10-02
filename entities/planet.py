@@ -10,12 +10,13 @@ class Planet(gt.Entites):
         super().__init__()
         self.app = app
         self.game = game
-
-        x: int = x if x is not None else random.randint(0, app.size[1])
-        y: int = y if y is not None else random.randint(0, app.size[0])
-
+        
         self.size: int = size if size is not None else random.randint(30, 60)
-        self.masse = self.size**2
+
+        x: int = x if x is not None else random.randint(0, game.map.sprite.get_size()[1]-self.size)
+        y: int = y if y is not None else random.randint(0, game.map.sprite.get_size()[0]-self.size)
+
+        self.masse = (self.size//2)**2
 
         self.attraction = self.size * 3
 
@@ -42,7 +43,7 @@ class Planet(gt.Entites):
                     except Exception:
                         pass
 
-        @self.event()
+        #@self.event()
         def follow_mouse(events: pg.event.Event):
             if events.type == pg.MOUSEMOTION:
                 self.sprite.set_pos((pg.mouse.get_pos()[0]-self.size//2, pg.mouse.get_pos()[1]-self.size//2))
