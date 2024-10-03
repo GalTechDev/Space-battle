@@ -2,7 +2,6 @@ import GTLib as gt
 import pygame as pg
 
 from entities import *
-from .map import Map
 from .pause import Pause
 
 class Game(gt.Menu):
@@ -16,7 +15,7 @@ class Game(gt.Menu):
         self.asteroids: list = []
         self.bullets: list = []
         
-        self.player1: Player = Player(profile="PROFILE_1", position=(self.app.size[0]//2-5, self.app.size[1]//2-5), size=(10,10))
+        self.player1: Player = Player(self, profile="PROFILE_1", position=(self.app.size[0]//2-5, self.app.size[1]//2-5), size=(10,10))
         self.camera = Camera(app, self, self.player1)
         
         self.canvas = pg.Surface(self.map.sprite.base_surface.get_size(), pg.SRCALPHA, 32)

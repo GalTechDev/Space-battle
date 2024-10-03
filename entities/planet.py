@@ -32,10 +32,7 @@ class Planet(gt.Entites):
         def get_asteroid_in_champ_action():
             for asteroid in self.game.asteroids:
                 asteroid: Asteroid
-                distance: float = Asteroid.calc_dist(self, asteroid)
-
-                if distance <= self.attraction or True:
-                    asteroid.update_velocity(self)
+                asteroid.update_velocity(self)
 
                 if self.sprite.colliderect(asteroid.sprite):
                     try:

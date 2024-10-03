@@ -2,12 +2,12 @@ import GTLib as gt
 import pygame as pg
 import random
 import numpy as np
-from Mechanics import AffectedByGravity
+from Mechanics import AffectedByGravity, ShowStats
 
 random.seed(1)
 
 
-class Asteroid(gt.Entites, AffectedByGravity):
+class Asteroid(gt.Entites, AffectedByGravity, ShowStats):
     def __init__(self, app: gt.Base, game, x: int = None, y: int = None, size: int = None):
         super().__init__()
         self.app = app

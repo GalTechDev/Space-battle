@@ -2,7 +2,7 @@ import GTLib as gt
 import pygame as pg
 import os
 
-class Map(gt.Menu):
+class Map(gt.Entites):
     def __init__(self, app: gt.Base, game, bg_image_path="") -> None:
         super().__init__()
         self.app = app

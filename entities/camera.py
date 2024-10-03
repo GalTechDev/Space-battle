@@ -34,16 +34,17 @@ class Camera(gt.Entites):
             distance_y = abs(temp_y)
             distance_y_after = abs(temp_y + player.velocity_y)
             
-            is_living = (np.sqrt(distance_x**2+distance_y**2) - np.sqrt(distance_x_after**2+distance_y_after**2)) < 0
+            is_living_x = distance_x - distance_x_after < 0
+            is_living_y = distance_y - distance_y_after < 0
             
-            if distance_x > app.size[0]//2-distance_to_border and is_living:
+            if distance_x > app.size[0]//2-distance_to_border and is_living_x:
                 self.sprite.rect.x += player.velocity_x
                 if self.sprite.rect.x < 0:
                     self.sprite.rect.x = 0
                 elif self.sprite.rect.x+self.sprite.get_size()[0] > game.map.sprite.base_surface.get_size()[0]:
                     self.sprite.rect.x = game.map.sprite.base_surface.get_size()[0]-self.sprite.get_size()[0]
                     
-            if distance_y > app.size[1]//2-distance_to_border and is_living:
+            if distance_y > app.size[1]//2-distance_to_border and is_living_y:
                 self.sprite.rect.y += player.velocity_y
                 if self.sprite.rect.y < 0:
                     self.sprite.rect.y = 0

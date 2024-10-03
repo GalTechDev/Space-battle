@@ -47,11 +47,3 @@ class AffectedByGravity:
         self.velocity_y += vy
 
         return vx, vy
-    
-    def calc_dist(self, object):
-        object_x, object_y = object.sprite.get_pos()
-        object_mid_size = object.sprite.get_size()[0]//2
-        self_x, self_y = self.sprite.get_pos()
-        self_mid_size = self.sprite.get_size()[0]//2
-
-        return np.sqrt((object_x+object_mid_size - self_x+self_mid_size)**2 + (object_y + object_mid_size - self_y)**2)

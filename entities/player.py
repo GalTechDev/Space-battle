@@ -19,7 +19,7 @@ class Player(gt.Entites):
         }
     }
     
-    def __init__(self, profile, position: tuple[int, int], size: tuple[int, int]):   
+    def __init__(self, game, profile, position: tuple[int, int], size: tuple[int, int]):   
         super().__init__()  
         self.sprite = gt.UI.Square(position=position, size=size, color="blue")
         self.move_set = self.controls.get(profile)
