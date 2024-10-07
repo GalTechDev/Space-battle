@@ -2,6 +2,8 @@ import pygame as pg
 from ..Tools.function import void
 
 class Sprite:
+    base_surface = None
+    
     def __init__(self, position: tuple[int,int], size: tuple[int,int], rotation: float=0, alpha: int=255):       
         self.set_surface(size,position)
         self.set_rotation(rotation) 
@@ -88,11 +90,12 @@ class Sprite:
         [f(events) for f in self.custom_event]
 
         return add_custom
-
-    def mask(self, size: tuple[int, int], focus_pos: tuple[int, int], focus_size:tuple[int, int]):
-        mask_surface = pg.Surface(focus_size,pg.SRCALPHA,32)
-        mask_surface.blit(self.surface, focus_pos)
-        self.surface = pg.transform.scale(mask_surface,size)
+        
+    def mask(self, position: tuple[int, int], size: tuple[int, int], focus_pos: tuple[int, int], focus_size:tuple[int, int]):
+        if not self.base_surface:
+            self.base_surface = self.surface.copy()
+        self.surface = pg.Surface(focus_size, pg.SRCALPHA,32)
+        self.surface.blit(self.base_surface, position, (-focus_pos[0], -focus_pos[1], *focus_size))
         self.rect.size = size
 
 

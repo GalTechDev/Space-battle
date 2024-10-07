@@ -1,8 +1,10 @@
 import GTLib as gt
 import pygame as pg
 import random
-import numpy as np
+import os
+from Mechanics import AffectedByGravity
 from .asteroid import Asteroid
+from .bullet import Bullet
 
 
 class Planet(gt.Entites):
@@ -11,34 +13,48 @@ class Planet(gt.Entites):
         self.app = app
         self.game = game
         
-        self.size: int = size if size is not None else random.randint(30, 60)
+        self.size: int = 165 #size if size is not None else random.randint(30, 60)
 
-        x: int = x if x is not None else random.randint(0, game.map.sprite.get_size()[1]-self.size)
-        y: int = y if y is not None else random.randint(0, game.map.sprite.get_size()[0]-self.size)
+        x: int = x if x is not None else random.randint(0, game.map.sprite.base_surface.get_size()[0]-self.size)
+        y: int = y if y is not None else random.randint(0, game.map.sprite.base_surface.get_size()[1]-self.size)
 
-        self.masse = (self.size//2)**2
+        self.masse = (self.size//3)**2
 
-        self.attraction = self.size * 3
+        self.attraction = self.size * 1
 
-        self.sprite = gt.Square(
+        self.sprite = gt.Image(
             position=(x, y),
             size=(self.size, self.size),
-            color="green"
+            path = os.path.join("sprite", "planet_1.png")
         )
 
         self.add_object(self.sprite)
 
         @self.update()
         def get_asteroid_in_champ_action():
-            for asteroid in self.game.asteroids:
-                asteroid: Asteroid
-                asteroid.update_velocity(self)
+            i=0
+            while i < len(self.game.objects):
+                object = self.game.objects[i]
+                if isinstance(object, AffectedByGravity):
+                    object.update_velocity(self)
 
-                if self.sprite.colliderect(asteroid.sprite):
-                    try:
-                        self.game.remove_object(asteroid)
-                    except Exception:
-                        pass
+                    if self.sprite.colliderect(object.sprite):
+                        if isinstance(object, Asteroid):
+                            try:
+                                self.game.asteroids.remove(object)
+                                self.game.remove_object(object)
+                                continue
+                            except Exception as error:
+                                print(f"error on asteroid kill : {error} {i} {len(self.game.asteroids)}")
+                                
+                        elif isinstance(object, Bullet):
+                            try:
+                                self.game.asteroids.remove(object)
+                                self.game.remove_object(object)
+                                continue
+                            except Exception as error:
+                                print(f"error on bullet kill : {error} {i} {len(self.game.bullets)}")
+                i+=1
 
         #@self.event()
         def follow_mouse(events: pg.event.Event):

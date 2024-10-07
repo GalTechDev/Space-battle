@@ -10,7 +10,7 @@ class Base:
         pg.init()
         
         self.size = size
-        self.screen = pg.display.set_mode(size, flags=pg.DOUBLEBUF)
+        self.screen = pg.display.set_mode((size[0]*2, size[1]), flags=pg.DOUBLEBUF)
 
         self.fps = fps
         self.clock = pg.time.Clock()
@@ -73,13 +73,14 @@ class Base:
             return func
         
         #update        
-        [f() for f in self.custom_update]
+        for f in self.custom_update:
+            f()
         for m in self.menu:
             m.update()
 
         return add_custom
 
-    async def draw(self):
+    def draw(self):
         self.screen.fill('black')
         
         for m in self.menu:
@@ -94,7 +95,8 @@ class Base:
         
         #event
         for e in pg.event.get():
-            [f(e) for f in self.custom_event]
+            for f in self.custom_event:
+                f(e)
             for m in self.menu:
                 m.event(e)
 

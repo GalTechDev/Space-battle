@@ -30,7 +30,3 @@ class Image(Sprite):
     def draw(self, screen):
         self.blit(screen, self.surface) #pg.transform.scale(self.surface, self.get_size()
         
-    def mask(self, size: tuple[int, int], focus_pos: tuple[int, int], focus_size:tuple[int, int]):
-        self.surface = pg.Surface(focus_size, pg.SRCALPHA,32)
-        self.surface.blit(self.base_surface, (0,0), (-focus_pos[0], -focus_pos[1], *focus_size))
-        self.rect.size = size

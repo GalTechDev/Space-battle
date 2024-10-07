@@ -3,7 +3,7 @@ import GTLib as gt
 
 class AffectedByGravity:
     
-    masse: int = 1
+    masse: int = 0.1
     sprite: gt.Sprite = None
 
     velocity_x: int = 0
@@ -37,7 +37,8 @@ class AffectedByGravity:
         direction_y /= distance
 
         # Force d'attraction gravitationnelle (simple modèle, sans constante G pour simplifier)
-        force = object.masse / distance
+        G = 6.67
+        force = G * (object.masse*self.masse) / distance**2
 
         # Mise à jour de la vitesse de l'astéroïde en fonction de la force gravitationnelle
         vx: float = direction_x * force / self.masse

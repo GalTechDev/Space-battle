@@ -12,10 +12,11 @@ class ShowStats:
     def draw(self, screen: pg.Surface):
         for object in self.objects:
             object.draw(screen)
-        print("h")
+        
         pg.draw.line(
             screen, 
             "pink", 
-            (self.sprite.get_size()[0]+self.sprite.get_size()[0], self.sprite.get_size()[1]+self.sprite.get_size()[1]),
-            (self.sprite.get_size()[0]+self.sprite.get_size()[0]+self.velocity_x, self.sprite.get_size()[1]+self.sprite.get_size()[1]+self.velocity_y)
+            (self.sprite.get_pos()[0]+self.sprite.get_size()[0]//2, self.sprite.get_pos()[1]+self.sprite.get_size()[1]//2),
+            (self.sprite.get_pos()[0]+self.sprite.get_size()[0]//2+self.velocity_x*10, self.sprite.get_pos()[1]+self.sprite.get_size()[1]//2+self.velocity_y*10),
+            2
         )
