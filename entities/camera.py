@@ -41,12 +41,12 @@ class Camera(gt.Entites):
                 self.sprite.rect.x += player.velocity_x
                 if self.sprite.rect.x < 0:
                     self.sprite.rect.x = 0
-                elif self.sprite.rect.x+self.sprite.get_size()[0] > game.map_1.sprite.get_size()[0]:
-                    self.sprite.rect.x = game.map_1.sprite.get_size()[0]-self.sprite.get_size()[0]
+                elif self.sprite.rect.x+self.sprite.get_size()[0] > game.map.sprite.base_surface.get_size()[0]:
+                    self.sprite.rect.x = game.map.sprite.base_surface.get_size()[0]-self.sprite.get_size()[0]
                     
             if distance_y > app.size[1]//2-distance_to_border and is_living_y:
                 self.sprite.rect.y += player.velocity_y
                 if self.sprite.rect.y < 0:
                     self.sprite.rect.y = 0
-                elif self.sprite.rect.y+self.sprite.get_size()[1] > game.map_1.sprite.get_size()[1]:
-                    self.sprite.rect.y = game.map_1.sprite.get_size()[1]-self.sprite.get_size()[1]
+                elif self.sprite.rect.y+self.sprite.get_size()[1] > game.map.sprite.base_surface.get_size()[1]:
+                    self.sprite.rect.y = game.map.sprite.base_surface.get_size()[1]-self.sprite.get_size()[1]

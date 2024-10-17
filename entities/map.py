@@ -1,40 +1,30 @@
 import GTLib as gt
 import random
-import os
+import pygame as pg
 
 class Map(gt.Entites):
-    def __init__(self, app: gt.Base, game, camera_index: str,bg_image_path="") -> None:
+    def __init__(self, app: gt.Base, game) -> None:
         super().__init__()
         self.app = app
         self.game = game
-        self.camera_index = camera_index
-        self.camera = game.camera_ply_1 if camera_index == "1" else game.camera_ply_2
         
         self.sprite = SpaceMap(
             size = (5000, 5000),
             nb_stars = 6000
         )
         
-        """self.sprite.mask(
-            position=(0 if camera_index == "1" else self.app.size[0],0),
-            size=self.app.size,
-            focus_pos=(-self.camera.sprite.get_pos()[0], -self.camera.sprite.get_pos()[1]),
-            focus_size=self.app.size
-        )"""
-        
         self.add_object(self.sprite)
-            
-            
-    """
-    def draw(self, screen):
+        
+    def draw(self, screen: pg.Surface, camera):
         self.sprite.mask(
-            position=(0 if self.camera_index == "1" else self.app.size[0],0),
+            position=(0, 0),
             size=self.app.size,
-            focus_pos=(-self.camera.sprite.get_pos()[0], -self.camera.sprite.get_pos()[1]),
+            focus_pos=(-camera.sprite.get_pos()[0], -camera.sprite.get_pos()[1]),
             focus_size=self.app.size
         )
-        self.sprite.draw(self.game.canvas_ply_1 if self.camera_index == "1" else self.game.canvas_ply_2)
-        """
+        
+        screen.blit(self.sprite.surface, camera.sprite.get_pos())
+            
             
 class SpaceMap(gt.Square):
     def __init__(self, size: tuple[int, int], nb_stars):
