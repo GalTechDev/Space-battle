@@ -16,17 +16,17 @@ class Asteroid(ShowStats, gt.Entites, AffectedByGravity):
 
         zone = random.choice(range(4))
         if zone == 0: #zone en haut
-            x: int = x if x is not None else random.uniform(-self.size, game.map_1.sprite.base_surface.get_size()[0])
+            x: int = x if x is not None else random.uniform(-self.size, game.map_1.sprite.get_size()[0])
             y: int = -self.size
         elif zone == 0: #zone en bas
-            x: int = x if x is not None else random.uniform(-self.size, game.map_1.sprite.base_surface.get_size()[0])
-            y: int = game.map_1.sprite.base_surface.get_size()[1]
+            x: int = x if x is not None else random.uniform(-self.size, game.map_1.sprite.get_size()[0])
+            y: int = game.map_1.sprite.get_size()[1]
         elif zone == 0: #zone a gauche
             x: int = -self.size
-            y: int = y if y is not None else random.uniform(-self.size, game.map_1.sprite.base_surface.get_size()[1])
+            y: int = y if y is not None else random.uniform(-self.size, game.map_1.sprite.get_size()[1])
         else: #zone a droite
-            x: int = game.map_1.sprite.base_surface.get_size()[0]
-            y: int = y if y is not None else random.uniform(-self.size, game.map_1.sprite.base_surface.get_size()[1])
+            x: int = game.map_1.sprite.get_size()[0]
+            y: int = y if y is not None else random.uniform(-self.size, game.map_1.sprite.get_size()[1])
         
             
         self.masse: int = (self.size//3)**2

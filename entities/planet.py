@@ -15,8 +15,8 @@ class Planet(gt.Entites):
         
         self.size: int = 165 #size if size is not None else random.randint(30, 60)
 
-        x: int = x if x is not None else random.randint(0, game.map.sprite.base_surface.get_size()[0]-self.size)
-        y: int = y if y is not None else random.randint(0, game.map.sprite.base_surface.get_size()[1]-self.size)
+        x: int = x if x is not None else random.randint(0, game.map.sprite.get_size()[0]-self.size)
+        y: int = y if y is not None else random.randint(0, game.map.sprite.get_size()[1]-self.size)
 
         self.masse = (self.size//3)**2
 

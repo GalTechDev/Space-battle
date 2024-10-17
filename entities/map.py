@@ -15,24 +15,26 @@ class Map(gt.Entites):
             nb_stars = 6000
         )
         
-        self.sprite.mask(
-            position=(0 if camera_index == "1" else self.app.size[1],0),
+        """self.sprite.mask(
+            position=(0 if camera_index == "1" else self.app.size[0],0),
             size=self.app.size,
             focus_pos=(-self.camera.sprite.get_pos()[0], -self.camera.sprite.get_pos()[1]),
             focus_size=self.app.size
-        )
+        )"""
         
-       #self.add_object(self.sprite)
+        self.add_object(self.sprite)
             
             
-    def draw(self, false_screen):
+    """
+    def draw(self, screen):
         self.sprite.mask(
-            position=(0 if self.camera_index == "1" else self.app.size[1],0),
+            position=(0 if self.camera_index == "1" else self.app.size[0],0),
             size=self.app.size,
             focus_pos=(-self.camera.sprite.get_pos()[0], -self.camera.sprite.get_pos()[1]),
             focus_size=self.app.size
         )
-        self.sprite.draw(self.app.screen)
+        self.sprite.draw(self.game.canvas_ply_1 if self.camera_index == "1" else self.game.canvas_ply_2)
+        """
             
 class SpaceMap(gt.Square):
     def __init__(self, size: tuple[int, int], nb_stars):

@@ -26,8 +26,11 @@ class Game(gt.Menu):
         self.map_1: Map = Map(app, self, "1")
         self.map_2: Map = Map(app, self, "2")
         
-        self.canvas_ply_1 = pg.Surface(self.map_1.sprite.base_surface.get_size(), pg.SRCALPHA, 32)
-        self.canvas_ply_2 = pg.Surface(self.map_2.sprite.base_surface.get_size(), pg.SRCALPHA, 32)
+        self.screen_ply_1 = pg.Surface(app.size, pg.SRCALPHA, 32)
+        self.screen_ply_2 = pg.Surface(app.size, pg.SRCALPHA, 32)
+        
+        self.canvas_ply_1 = pg.Surface(self.map_1.sprite.get_size(), pg.SRCALPHA, 32)
+        self.canvas_ply_2 = pg.Surface(self.map_2.sprite.get_size(), pg.SRCALPHA, 32)
         
         self.rect_ply_1 = self.canvas_ply_1.get_rect()
         self.rect_ply_2 = self.canvas_ply_2.get_rect()
@@ -82,7 +85,10 @@ class Game(gt.Menu):
         self.add_object(self.asteroids[-1])
 
     def draw(self, screen: pg.Surface):
-        self.canvas_ply_1.fill((0,0,0,0))
+        self.screen_ply_1.fill((255,0,0,255))
+        self.screen_ply_2.fill((0,0,0,0))
+        
+        self.canvas_ply_1.fill((0,255,0,255))
         self.canvas_ply_2.fill((0,0,0,0))
         
         for object in self.objects:
@@ -91,11 +97,14 @@ class Game(gt.Menu):
 
         self.rect_ply_1.x = -self.camera_ply_1.sprite.rect.x
         self.rect_ply_1.y = -self.camera_ply_1.sprite.rect.y
-        self.rect_ply_1.width = self.app.size[0]
+        #self.rect_ply_1.width = self.app.size[0]
         
-        self.rect_ply_2.x = -self.camera_ply_2.sprite.rect.x + self.app.size[0]
+        self.rect_ply_2.x = -self.camera_ply_2.sprite.rect.x #+ self.app.size[0]
         self.rect_ply_2.y = -self.camera_ply_2.sprite.rect.y
-        self.rect_ply_2.width = self.app.size[0]
+        #self.rect_ply_2.width = self.app.size[0]
         
-        screen.blit(self.canvas_ply_1, self.rect_ply_1)
-        screen.blit(self.canvas_ply_2, self.rect_ply_2)
+        self.screen_ply_1.blit(self.canvas_ply_1, self.rect_ply_1) #self.rect_ply_1
+        self.screen_ply_2.blit(self.canvas_ply_2, self.rect_ply_2) #self.rect_ply_2
+        
+        screen.blit(self.screen_ply_1, (0, 0))
+        screen.blit(self.screen_ply_2, (self.app.size[0], 0))
