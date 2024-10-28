@@ -1,6 +1,7 @@
 import pygame as pg
 from ..Tools.function import void
 
+
 class Sprite:
     base_surface = None
     
@@ -94,6 +95,7 @@ class Sprite:
     def mask(self, position: tuple[int, int], size: tuple[int, int], focus_pos: tuple[int, int], focus_size:tuple[int, int]):
         if not self.base_surface:
             self.base_surface = self.surface.copy()
+
         self.surface = pg.Surface(focus_size, pg.SRCALPHA,32)
         self.surface.blit(self.base_surface, position, (-focus_pos[0], -focus_pos[1], *focus_size))
         self.rect.size = size
@@ -127,14 +129,15 @@ class Group:
         return self.all_sprite.index(sprite)
 
     def pop(self, index=0):
-        if index>=0 and index<len(self.all_sprite):
+        if index >= 0 and index<len(self.all_sprite):
             self.all_sprite.pop(index)
 
     def have(self, sprite):
         return sprite in self.all_sprite
 
     def get_collidepoint(self,pos):
-        collide=[]
+        collide: list = []
+
         for sprite in self.all_sprite:
             if sprite.collidepoint(pos):
                 collide.append(sprite)

@@ -2,6 +2,7 @@ import GTLib as gt
 import pygame as pg
 import pygame.freetype as ft
 
+
 class Pause(gt.Menu):
     def __init__(self, app: gt.Base, game: gt.Menu) -> None:
         super().__init__()
@@ -23,8 +24,5 @@ class Pause(gt.Menu):
         def resume_game(events):
             if events.type == pg.KEYDOWN:
                 if events.key == pg.K_ESCAPE:
-                    app.call_menu(game)                  
-                    #app.call_menu(game.player1)
-                    #app.call_menu(game.player2)
-                    
+                    app.call_menu(game)                                     
                     app.drop_menu(self)

@@ -7,9 +7,13 @@ class Map(gt.Entites):
         super().__init__()
         self.app = app
         self.game = game
+
+        size =(5000, 5000)
         
+        #self.chunks = [ i for i in range()]
+
         self.sprite = SpaceMap(
-            size = (5000, 5000),
+            size = size,
             nb_stars = 6000
         )
         

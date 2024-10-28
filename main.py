@@ -16,5 +16,5 @@ def quit(event):
 
 mygame = Game(app)
 
-app.call_menu(mygame)
+app.call_menu(Home(app))
 app.run()

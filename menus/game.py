@@ -13,23 +13,21 @@ class Game(gt.Menu):
         self.asteroids: list = []
         self.bullets: list = []
         
-        self.nb_asteroids = 20
+        self.nb_asteroids: int = 20
         
         self.player1: Player = Player(self, profile="PROFILE_1", position=(self.app.size[0]//2-5, self.app.size[1]//2-5), size=(10,10))
-        self.camera_ply_1 = Camera(app, self, self.player1)
+        self.camera_ply_1: Camera = Camera(app, self, self.player1)
         
         self.player2: Player = Player(self, profile="PROFILE_2", position=(self.app.size[0]//2-5, self.app.size[1]//2-5), size=(10,10))
-        self.camera_ply_2 = Camera(app, self, self.player2)
+        self.camera_ply_2: Camera = Camera(app, self, self.player2)
         
         self.map: Map = Map(app, self)
         
         self.screen_ply_1 = pg.Surface(app.size, pg.SRCALPHA, 32)
         self.screen_ply_2 = pg.Surface(app.size, pg.SRCALPHA, 32)
         
-        self.canvas_ply = pg.Surface(self.map.sprite.get_size())
-        print(self.canvas_ply.get_size())
-        self.rect_ply_1 = self.canvas_ply.get_rect()
-        self.rect_ply_2 = self.canvas_ply.get_rect()
+        self.rect_ply_1 = self.screen_ply_1.get_rect()
+        self.rect_ply_2 = self.screen_ply_2.get_rect()
         
 
         self.add_object(self.player1)
@@ -77,27 +75,18 @@ class Game(gt.Menu):
 
     def draw(self, screen: pg.Surface):      
         
-        canvas_ply_1 = canvas_ply_2 = self.canvas_ply.copy()
-        
-        self.map.draw(canvas_ply_1, self.camera_ply_1)
-        self.map.draw(canvas_ply_2, self.camera_ply_2)
-        
         for object in self.objects:
-            object.draw(canvas_ply_1)
-            object.draw(canvas_ply_2)
+            object.draw(self.screen_ply_1)
+            object.draw(self.screen_ply_2)
             
-        self.camera_ply_1.draw(canvas_ply_1)
-        self.camera_ply_2.draw(canvas_ply_2)
+        self.camera_ply_1.draw(self.screen_ply_1)
+        self.camera_ply_2.draw(self.screen_ply_2)
 
         self.rect_ply_1.x = -self.camera_ply_1.sprite.rect.x
         self.rect_ply_1.y = -self.camera_ply_1.sprite.rect.y
         
         self.rect_ply_2.x = -self.camera_ply_2.sprite.rect.x 
         self.rect_ply_2.y = -self.camera_ply_2.sprite.rect.y
-        
-        
-        self.screen_ply_1.blit(canvas_ply_1, self.rect_ply_1)
-        self.screen_ply_2.blit(canvas_ply_2, self.rect_ply_2)
         
         screen.blit(self.screen_ply_1, (0, 0))
         screen.blit(self.screen_ply_2, (self.app.size[0], 0))
